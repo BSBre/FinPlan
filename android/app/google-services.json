@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1097475671100",
+    "project_id": "finplan-b56cb",
+    "storage_bucket": "finplan-b56cb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1097475671100:android:f2b46874349289b8322f39",
+        "android_client_info": {
+          "package_name": "com.finplan.finplan"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1097475671100-cguncbkqimlv8q73j8muuvnsl32n7qs6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA8shdYWJhm8JzEQe2BC2jUJ5qS2yO87Ds"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1097475671100-cguncbkqimlv8q73j8muuvnsl32n7qs6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
