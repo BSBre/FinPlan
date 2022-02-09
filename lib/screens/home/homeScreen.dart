@@ -1,15 +1,90 @@
-
-
-import 'package:flutter/cupertino.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:finplan/screens/navigation_screens/calendarPage.dart';
+import 'package:finplan/screens/navigation_screens/homePage.dart';
+import 'package:finplan/screens/navigation_screens/notificationPage.dart';
+import 'package:finplan/screens/navigation_screens/paymentPage.dart';
+import 'package:finplan/screens/navigation_screens/profilePage.dart';
+import 'package:finplan/screens/no_internet/no_internet_screen.dart';
+import 'package:finplan/values/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_snake_navigationbar/flutter_snake_navigationbar.dart';
 
-class HomePage extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  final _auth = FirebaseAuth.instance;
+  late User loggedInUser;
+  int selectedItemPosition = 2;
 
   @override
+  void initState() {
+    super.initState();
+    getCurrentUser();
+  }
+
+  void getCurrentUser() {
+    try {
+      final User? user = _auth.currentUser;
+      if (user != null) {
+        loggedInUser = user;
+      }
+    } catch (e) {
+      print(e);
+    }
+  }
+  List<Widget> pages = [
+    NotificationPage(),
+    CalendarPage(),
+    HomePage(),
+    PaymentPage(),
+    ProfilePage(),
+  ];
+  @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white,
-      body: Center(child: Text('Cao licmi'),),
+    return StreamBuilder(
+      stream: Connectivity().onConnectivityChanged,
+
+      builder: (BuildContext context, AsyncSnapshot<ConnectivityResult> snapshot) {
+        if (snapshot.data != ConnectivityResult.none) {
+          return Scaffold(
+            bottomNavigationBar: SnakeNavigationBar.color(
+              behaviour: SnakeBarBehaviour.pinned,
+              snakeShape: SnakeShape.indicator,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(
+                  Radius.circular(25),
+                ),
+              ),
+              snakeViewColor: FinPlanColor,
+              selectedItemColor: FinPlanColor,
+              unselectedItemColor: Colors.grey,
+              currentIndex: selectedItemPosition,
+              //TODO Uraditi sa bloc-om setState
+              onTap: (index) {
+                setState(() {
+                  selectedItemPosition = index;
+                });
+              },
+              items: [
+                BottomNavigationBarItem(icon: Icon(Icons.notifications), label: 'notifications'),
+                BottomNavigationBarItem(icon: Icon(Icons.calendar_today), label: 'calendar'),
+                BottomNavigationBarItem(icon: Icon(Icons.home), label: 'home'),
+                BottomNavigationBarItem(icon: Icon(Icons.attach_money_sharp), label: 'payments'),
+                BottomNavigationBarItem(icon: Icon(Icons.account_circle), label: 'profile'),
+              ],
+            ),
+            backgroundColor: Colors.white,
+            body: pages[selectedItemPosition],
+          );
+        }
+        else {
+          return NoInternetScreen();
+        }
+      }
     );
   }
 }
