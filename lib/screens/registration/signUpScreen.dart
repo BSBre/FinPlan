@@ -143,10 +143,12 @@ class SignUpPage extends StatelessWidget {
             final data = await _auth.createUserWithEmailAndPassword(email: _emailController.text, password: _pwdController.text);
 
             FirebaseApi.addItem(userEmail: _emailController.text,
+                userId: data.user?.uid,
                 dateCreated: DateTime.now(),
                 userFirstName: _firstNameController.text,
                 userLastName: _lastNameController.text,
                 userPassword: _pwdController.text);
+
             showAlertFunction(context, "success".tr(),"register_success".tr());
 
           }
