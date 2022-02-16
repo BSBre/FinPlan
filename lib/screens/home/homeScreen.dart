@@ -1,9 +1,9 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
-import 'package:finplan/screens/navigation_screens/calendarPage.dart';
-import 'package:finplan/screens/navigation_screens/homePage.dart';
-import 'package:finplan/screens/navigation_screens/notificationPage.dart';
-import 'package:finplan/screens/navigation_screens/paymentPage.dart';
-import 'package:finplan/screens/navigation_screens/profilePage.dart';
+import 'package:finplan/screens/navigation/calendarPage.dart';
+import 'package:finplan/screens/navigation/homePage.dart';
+import 'package:finplan/screens/navigation/notificationPage.dart';
+import 'package:finplan/screens/navigation/paymentPage.dart';
+import 'package:finplan/screens/navigation/profilePage.dart';
 import 'package:finplan/screens/no_internet/no_internet_screen.dart';
 import 'package:finplan/values/constants.dart';
 import 'package:flutter/material.dart';

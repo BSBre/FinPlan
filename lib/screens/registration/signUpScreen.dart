@@ -3,6 +3,7 @@ import 'package:finplan/authentication/user_auth.dart';
 import 'package:finplan/bloc/sign_up_bloc/sign_up_bloc.dart';
 import 'package:finplan/config/models/alertDialog_model.dart';
 import 'package:finplan/screens/registration/widgets/signUpCard.dart';
+import 'package:finplan/values/constants.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -53,11 +54,12 @@ class SignUpPage extends StatelessWidget {
             width: MediaQuery.of(context).size.width,
             height: MediaQuery.of(context).size.height - 40,
             child: Container(
-              margin: EdgeInsets.symmetric(horizontal: 15,),
+              margin: EdgeInsets.symmetric(
+                horizontal: 15,
+              ),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-
                   Text(
                     'hello'.tr(),
                     style: TextStyle(color: Colors.black, fontSize: 25, fontWeight: FontWeight.bold),
@@ -97,7 +99,6 @@ class SignUpPage extends StatelessWidget {
                     hidden: true,
                   ),
                   Row(
-
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                       Expanded(
@@ -110,7 +111,9 @@ class SignUpPage extends StatelessWidget {
                           hidden: false,
                         ),
                       ),
-                      SizedBox(width: 10,),
+                      SizedBox(
+                        width: 10,
+                      ),
                       Expanded(
                         child: SignUpCard(
                           containerWidth: double.infinity,
@@ -123,8 +126,10 @@ class SignUpPage extends StatelessWidget {
                       ),
                     ],
                   ),
-                 SizedBox(height: 20,),
-                 signUpButton(context),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  signUpButton(context),
                 ],
               ),
             ),
@@ -134,29 +139,42 @@ class SignUpPage extends StatelessWidget {
     );
   }
 
-  Widget signUpButton(BuildContext context) {
-    return InkWell(
+ 
+
+  Widget signUpButton(BuildContext context) {return InkWell(
       onTap: () async {
         try {
-
-          if(_pwdController.text == _confirmPwdController.text) {
+          if (_pwdController.text == _confirmPwdController.text) {
             final data = await _auth.createUserWithEmailAndPassword(email: _emailController.text, password: _pwdController.text);
 
-            FirebaseApi.addItem(userEmail: _emailController.text,
+            FirebaseApi.addItem(
+                userEmail: _emailController.text,
                 userId: data.user?.uid,
                 dateCreated: DateTime.now(),
                 userFirstName: _firstNameController.text,
                 userLastName: _lastNameController.text,
                 userPassword: _pwdController.text);
 
-            showAlertFunction(context, "success".tr(),"register_success".tr());
-
-          }
-          else{
-            showAlertFunction(context, "passwords_not_same".tr(), "confirm_passwords".tr());
+            showAlertFunction(
+              buildContext:context,
+              title: "success".tr(),
+              message: "register_success".tr(),
+              closingText: "close".tr(),
+              affirmativeText: "log_in".tr(),
+              onPressedFunction: (){Navigator.popUntil(context, ModalRoute.withName(SignInPageRoute));},
+            );
+          } else {
+            showAlertFunction(
+              buildContext: context,
+              title: "passwords_not_same".tr(),
+              message: "confirm_passwords".tr(),
+              closingText: "close".tr(),
+              affirmativeText: "try_again".tr(),
+              onPressedFunction:(){ Navigator.pop(context);},
+            );
             // passwordsDifferentAlert(context);
           }
-          } catch (e) {
+        } catch (e) {
           print(e.toString());
         }
       },

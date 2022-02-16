@@ -43,9 +43,12 @@ class _CalendarPageState extends State<CalendarPage> with TickerProviderStateMix
       (isAllowed) {
         if (!isAllowed) {
           showAlertFunction(
-            context,
-            "notification_title".tr(),
-            "notification_description".tr(),
+            buildContext: context,
+            title: "notification_title".tr(),
+            message:"notification_description".tr(),
+            closingText: "close".tr(),
+            affirmativeText: "send".tr(),
+            onPressedFunction:(){ AwesomeNotifications().requestPermissionToSendNotifications();}
           );
         }
       },

@@ -108,7 +108,7 @@ class SignInPage extends StatelessWidget {
           await _auth.signInWithEmailAndPassword(email: _emailController.text, password: _pwdController.text);
           print(_auth.currentUser?.uid);
           Navigator.of(context).pop();
-          Navigator.of(context).pushNamed(HomePageRoute);
+          Navigator.of(context).pushNamed(IntroScreenRoute);
         } catch (e) {
           print(e.toString());
         }
