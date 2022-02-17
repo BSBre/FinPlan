@@ -28,7 +28,9 @@ dependencies:
   connectivity_plus: ^2.2.0
   upgrader: ^3.12.1
   table_calendar: ^3.0.3
-  awesome_notifications: ^0.6.21 #update after 0.7.0 comes out, error on 0.6.0
+  awesome_notifications: ^0.0.6+12 #leave at 0.0.6+12 update after 0.7.0 comes out, error on 0.6.0
+  firebase_messaging: ^11.2.6
+  intro_slider: ^3.0.3
 
 dev_dependencies:
   flutter_test:

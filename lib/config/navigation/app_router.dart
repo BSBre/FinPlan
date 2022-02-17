@@ -1,7 +1,8 @@
 import 'package:finplan/authentication/user_auth.dart';
 import 'package:finplan/screens/home/homeScreen.dart';
-import 'package:finplan/screens/navigation_screens/calendarPage.dart';
-import 'package:finplan/screens/navigation_screens/paymentPage.dart';
+import 'package:finplan/screens/intro/intro_screen.dart';
+import 'package:finplan/screens/navigation/calendarPage.dart';
+import 'package:finplan/screens/navigation/paymentPage.dart';
 import 'package:finplan/screens/registration/signInScreen.dart';
 import 'package:finplan/screens/registration/signUpScreen.dart';
 import 'package:flutter/cupertino.dart';
@@ -23,6 +24,8 @@ class AppRouter {
         return MaterialPageRoute(builder: (_) => CalendarPage());
       case PaymentPageRoute:
         return MaterialPageRoute(builder: (_) => PaymentPage());
+      case IntroScreenRoute:
+        return MaterialPageRoute(builder: (_) => IntroScreen());
       default:
         return _errorRoute();
     }

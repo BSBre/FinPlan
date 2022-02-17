@@ -1,13 +1,14 @@
-import 'dart:async';
-
 import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:finplan/authentication/user_auth.dart';
 import 'package:finplan/config/models/alertDialog_model.dart';
 import 'package:finplan/config/models/custom_form_field.dart';
 import 'package:finplan/config/models/notification_model.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:finplan/values/constants.dart';
+import 'package:finplan/services/FirebaseApi.dart';
 
 class CalendarPage extends StatefulWidget {
   @override
@@ -24,6 +25,7 @@ class Event {
 
 class _CalendarPageState extends State<CalendarPage> with TickerProviderStateMixin {
   late AnimationController _animationController;
+  final user = FirebaseAuth.instance;
 
   DateTime _focusedDay = DateTime.now();
   DateTime _selectedDay = DateTime.now();
@@ -41,9 +43,12 @@ class _CalendarPageState extends State<CalendarPage> with TickerProviderStateMix
       (isAllowed) {
         if (!isAllowed) {
           showAlertFunction(
-            context,
-            "notification_title".tr(),
-            "notification_description".tr(),
+            buildContext: context,
+            title: "notification_title".tr(),
+            message:"notification_description".tr(),
+            closingText: "close".tr(),
+            affirmativeText: "send".tr(),
+            onPressedFunction:(){ AwesomeNotifications().requestPermissionToSendNotifications();}
           );
         }
       },
@@ -67,8 +72,6 @@ class _CalendarPageState extends State<CalendarPage> with TickerProviderStateMix
     super.dispose();
   }
 
-
-
   void _onDaySelected(DateTime selectedDay, DateTime focusedDay) {
     if (!isSameDay(_selectedDay, selectedDay)) {
       setState(() {
@@ -86,6 +89,8 @@ class _CalendarPageState extends State<CalendarPage> with TickerProviderStateMix
         title: Text(
           "calendar_title".tr(),
           style: TextStyle(color: FinPlanColor),
+
+
         ).tr(),
         backgroundColor: Colors.white,
         elevation: 0,
@@ -94,6 +99,11 @@ class _CalendarPageState extends State<CalendarPage> with TickerProviderStateMix
           RawMaterialButton(
             onPressed: () {
               _addNewEventBottomSheet(context);
+              print(user.currentUser?.tenantId);
+              print(user.currentUser?.uid);
+              print(user.currentUser);
+              print(user.currentUser?.displayName);
+
             },
             child: Container(
                 width: 30,
@@ -192,6 +202,7 @@ class _CalendarPageState extends State<CalendarPage> with TickerProviderStateMix
       ),
     );
   }
+
   void _addNewEventBottomSheet(BuildContext context) {
     TextEditingController descriptionController = TextEditingController();
     TextEditingController dateinput = TextEditingController();
@@ -206,7 +217,6 @@ class _CalendarPageState extends State<CalendarPage> with TickerProviderStateMix
     int? selectedYear = 0;
     int? selectedMonth = 0;
     int? selectedDay = 0;
-
     showModalBottomSheet(
       isScrollControlled: true,
       context: context,
@@ -254,7 +264,6 @@ class _CalendarPageState extends State<CalendarPage> with TickerProviderStateMix
 
                     if (pickedDate != null) {
                       String formattedDate = DateFormat('dd-MM-yyyy').format(pickedDate!);
-
                       selectedYear = pickedDate?.year;
                       selectedDay = pickedDate?.day;
                       selectedMonth = pickedDate?.month;
@@ -321,6 +330,7 @@ class _CalendarPageState extends State<CalendarPage> with TickerProviderStateMix
                       context: context,
                       initialTime: TimeOfDay.fromDateTime(DateTime.now()),
                     );
+
                     selectedHour = pickedTime?.hour;
                     selectedMinute = pickedTime?.minute;
                     if (pickedTime?.hour == 0) {
@@ -348,6 +358,14 @@ class _CalendarPageState extends State<CalendarPage> with TickerProviderStateMix
                         selectedYear: selectedYear,
                         selectedMonth: selectedMonth,
                         selectedDay: selectedDay);
+                    DateTime dateForApi = DateTime(selectedYear!, selectedMonth!, selectedDay!, selectedHour!, selectedMinute!);
+                    FirebaseApi.createNotification(
+                      notificationTitle: titleController.text,
+                      dateCreated: DateTime.now(),
+                      notificationDescription: descriptionController.text,
+                      userId: user.currentUser?.uid,
+                      dateSelected: dateForApi,
+                    );
                   },
                   child: Container(
                     padding: EdgeInsets.symmetric(vertical: 15),

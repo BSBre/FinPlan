@@ -14,6 +14,7 @@ import 'package:finplan/values/constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 
 // BLOC LOG IN VIDEO
 //
@@ -47,6 +48,7 @@ void main() async {
   await EasyLocalization.ensureInitialized();
   await Firebase.initializeApp();
   final UserAuth userAuth = UserAuth(firebaseAuth: FirebaseAuth.instance);
+  FirebaseMessaging.onBackgroundMessage(_fireBaseMessagingNotification);
 
   BlocOverrides.runZoned(
     () => runApp(
@@ -69,6 +71,7 @@ void main() async {
     blocObserver: SimpleBlocObserver(),
   );
 }
+
 
 class MyApp extends StatefulWidget {
   final UserAuth _userAuth;
@@ -117,4 +120,8 @@ class _MyAppState extends State<MyApp> {
       initialRoute: SignInPageRoute,
     );
   }
+}
+
+Future<void> _fireBaseMessagingNotification(RemoteMessage message) async{
+  AwesomeNotifications().createNotificationFromJsonData(message.data);
 }

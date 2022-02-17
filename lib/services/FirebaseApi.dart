@@ -12,9 +12,10 @@ class FirebaseApi {
     required String userPassword,
     required String userFirstName,
     required String userLastName,
+    required String? userId,
   }) async {
     DocumentReference usersDocument =
-    _dataBase.collection('users').doc();
+    _dataBase.collection('users').doc(userId);
 
     Map<String, dynamic> data = <String, dynamic>{
       "userEmail": userEmail,
@@ -35,5 +36,34 @@ class FirebaseApi {
     
   }
 
+
+  static Future<void> createNotification({
+    required String notificationTitle,
+    required DateTime dateCreated,
+    required DateTime dateSelected,
+    required String notificationDescription,
+    required String? userId,
+  }) async {
+    DocumentReference usersDocument =
+    _dataBase.collection('users').doc(userId).collection("notifications").doc();
+
+    Map<String, dynamic> data = <String, dynamic>{
+      "title": notificationTitle,
+      "dateCreated": dateCreated,
+      "description": notificationDescription,
+      "dateSelected" : dateSelected,
+    };
+
+
+
+    await usersDocument
+        .set(data)
+        .whenComplete(() => print("Notes item added to the database"))
+        .catchError((e) => print(e));
+
+
+
+  }
 }
+FirebaseApi fApi = FirebaseApi();
 
