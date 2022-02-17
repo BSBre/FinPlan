@@ -31,7 +31,7 @@ class SignInPage extends StatelessWidget {
               'no_account'.tr(),
               style: TextStyle(
                 fontSize: 15,
-                color: Theme.of(context).primaryColor,
+                //color: Theme.of(context).primaryColor,
               ),
             ),
             InkWell(
@@ -43,7 +43,7 @@ class SignInPage extends StatelessWidget {
                 style: TextStyle(
                   fontSize: 15,
                   fontWeight: FontWeight.bold,
-                  color: Theme.of(context).primaryColor,
+                  //color: Theme.of(context).primaryColor,
                 ),
               ),
             ),
@@ -62,20 +62,22 @@ class SignInPage extends StatelessWidget {
                 Text(
                   'FinPlan',
                   style: TextStyle(
-                    fontSize: 25,
+                    fontSize: 40,
                     fontWeight: FontWeight.bold,
-                    color: Theme.of(context).primaryColor,
                   ),
                 ),
                 SizedBox(height: 15),
                 UnDraw(
                   height: 150,
                   width: 150,
-                  color: Colors.deepPurple,
+                  color: Theme.of(context).primaryColor,
                   illustration: UnDrawIllustration.online_banking,
                   placeholder: CircularProgressIndicator(),
-                  errorWidget:
-                      Icon(Icons.error_outline, color: Colors.red, size: 50),
+                  errorWidget: Icon(
+                    Icons.error_outline,
+                    color: Colors.red,
+                    size: 50,
+                  ),
                 ),
                 SizedBox(height: 25),
                 SignInCard(
@@ -122,8 +124,7 @@ class SignInPage extends StatelessWidget {
     return InkWell(
       onTap: () async {
         try {
-          await _auth.signInWithEmailAndPassword(
-              email: _emailController.text, password: _pwdController.text);
+          await _auth.signInWithEmailAndPassword(email: _emailController.text, password: _pwdController.text);
           print(_auth.currentUser?.uid);
           Navigator.of(context).pop();
           Navigator.of(context).pushNamed(IntroScreenRoute);
@@ -142,8 +143,8 @@ class SignInPage extends StatelessWidget {
           child: Text(
             'log_in'.tr(),
             style: TextStyle(
-              fontSize: 15,
               color: Theme.of(context).secondaryHeaderColor,
+              fontSize: 15,
             ),
           ),
         ),

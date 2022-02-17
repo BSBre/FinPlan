@@ -59,9 +59,10 @@ class _HomeScreenState extends State<HomeScreen> {
                   Radius.circular(25),
                 ),
               ),
+              backgroundColor: Theme.of(context).bottomNavigationBarTheme.unselectedItemColor,
               snakeViewColor: Theme.of(context).primaryColor,
               selectedItemColor: Theme.of(context).primaryColor,
-              unselectedItemColor: Theme.of(context).secondaryHeaderColor,
+              unselectedItemColor: Theme.of(context).bottomNavigationBarTheme.backgroundColor,
               currentIndex: selectedItemPosition,
               //TODO Uraditi sa bloc-om setState
               onTap: (index) {

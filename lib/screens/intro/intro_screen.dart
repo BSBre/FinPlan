@@ -25,12 +25,12 @@ class _IntroScreenState extends State<IntroScreen> {
         styleTitle: TextStyle(
           fontSize: 30.0,
           fontWeight: FontWeight.bold,
-          color: FinPlanDarkSecondayColor,
+          color: TextColor,
         ),
         description: "intro_description1".tr(),
         styleDescription: TextStyle(
           fontSize: 20.0,
-          color: FinPlanDarkSecondayColor,
+          color: TextColor,
         ),
         backgroundImage: "assets/images/intro1.jpg",
       ),
@@ -41,12 +41,12 @@ class _IntroScreenState extends State<IntroScreen> {
         styleTitle: TextStyle(
           fontSize: 30.0,
           fontWeight: FontWeight.bold,
-          color: FinPlanDarkSecondayColor,
+          color: TextColor,
         ),
         description: "intro_description2".tr(),
         styleDescription: TextStyle(
           fontSize: 20.0,
-          color: FinPlanDarkSecondayColor,
+          color: TextColor,
         ),
         backgroundImage: "assets/images/intro2.jpg",
       ),
@@ -57,12 +57,12 @@ class _IntroScreenState extends State<IntroScreen> {
         styleTitle: TextStyle(
           fontSize: 30.0,
           fontWeight: FontWeight.bold,
-          color: FinPlanDarkSecondayColor,
+          color: TextColor,
         ),
         description: "intro_description3".tr(),
         styleDescription: TextStyle(
           fontSize: 20.0,
-          color: FinPlanDarkSecondayColor,
+          color: TextColor,
         ),
         backgroundImage: "assets/images/intro3.jpg",
       ),
@@ -81,27 +81,20 @@ class _IntroScreenState extends State<IntroScreen> {
   Widget renderNextBtn() {
     return Text(
       "next".tr(),
-      style: TextStyle(
-        color: Theme.of(context).secondaryHeaderColor,
-      ),
     );
   }
 
   Widget renderDoneBtn() {
     return Text(
       "done".tr(),
-      style: TextStyle(
-        color: Theme.of(context).secondaryHeaderColor,
-      ),
+
     );
   }
 
   Widget renderSkipBtn() {
     return Text(
       "skip".tr(),
-      style: TextStyle(
-        color: Theme.of(context).secondaryHeaderColor,
-      ),
+
     );
   }
 
@@ -114,6 +107,8 @@ class _IntroScreenState extends State<IntroScreen> {
       overlayColor: MaterialStateProperty.all<Color>(
         Theme.of(context).secondaryHeaderColor,
       ),
+      foregroundColor: MaterialStateProperty.all<Color>(Theme.of(context).secondaryHeaderColor),
+
     );
   }
 
@@ -144,7 +139,7 @@ class _IntroScreenState extends State<IntroScreen> {
 
       // Show or hide status bar
       hideStatusBar: true,
-      backgroundColorAllSlides: Colors.grey,
+      backgroundColorAllSlides: Theme.of(context).secondaryHeaderColor,
 
       // Scrollbar
       verticalScrollbarBehavior: scrollbarBehavior.SHOW_ALWAYS,

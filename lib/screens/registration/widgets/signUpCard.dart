@@ -57,22 +57,22 @@ class _SignUpCardState extends State<SignUpCard> {
               width: widget.containerWidth,
               height: 50,
               decoration: BoxDecoration(
-                color: Theme.of(context).colorScheme.secondary,
+                color: Theme.of(context).secondaryHeaderColor,
                 borderRadius: BorderRadius.circular(25),
               ),
               child: Padding(
                 padding: EdgeInsets.symmetric(vertical: 0, horizontal: 15),
                 child: TextFormField(
+                  style: TextStyle(color: Theme.of(context).primaryColor),
+                  cursorColor: Theme.of(context).primaryColor,
                   keyboardType: TextInputType.emailAddress,
                   controller: widget.controller,
                   obscureText: widget.hidden,
-                  
                   decoration: InputDecoration(
                     
                       icon: FaIcon(
                         widget.icon,
                         size: 20,
-                        color: Theme.of(context).primaryColor,
                       ),
                       border: InputBorder.none,
                       hintText: widget.title,

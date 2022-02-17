@@ -27,20 +27,30 @@ class SignUpPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).backgroundColor,
+      //backgroundColor: Theme.of(context).backgroundColor,
       bottomNavigationBar: Padding(
         padding: EdgeInsets.only(bottom: 25),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text('yes_account'.tr(), style: TextStyle(fontSize: 15, color: Theme.of(context).primaryColor,),),
+            Text(
+              'yes_account'.tr(),
+              style: TextStyle(
+                fontSize: 15,
+                //color: Theme.of(context).primaryColor,
+              ),
+            ),
             InkWell(
               onTap: () {
                 Navigator.of(context).pop();
               },
               child: Text(
                 'log_in'.tr(),
-                style: TextStyle(fontSize: 15, color: Theme.of(context).primaryColor, fontWeight: FontWeight.bold,),
+                style: TextStyle(
+                  fontSize: 15,
+                  //color: Theme.of(context).primaryColor,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ),
           ],
@@ -61,7 +71,10 @@ class SignUpPage extends StatelessWidget {
                 children: [
                   Text(
                     'hello'.tr(),
-                    style: TextStyle(color: Theme.of(context).primaryColor, fontSize: 25, fontWeight: FontWeight.bold),
+                    style: TextStyle(
+                      fontSize: 40,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                   SizedBox(height: 15),
                   UnDraw(
@@ -138,9 +151,8 @@ class SignUpPage extends StatelessWidget {
     );
   }
 
- 
-
-  Widget signUpButton(BuildContext context) {return InkWell(
+  Widget signUpButton(BuildContext context) {
+    return InkWell(
       onTap: () async {
         try {
           if (_pwdController.text == _confirmPwdController.text) {
@@ -155,12 +167,14 @@ class SignUpPage extends StatelessWidget {
                 userPassword: _pwdController.text);
 
             showAlertFunction(
-              buildContext:context,
+              buildContext: context,
               title: "success".tr(),
               message: "register_success".tr(),
               closingText: "close".tr(),
               affirmativeText: "log_in".tr(),
-              onPressedFunction: (){Navigator.popUntil(context, ModalRoute.withName(SignInPageRoute));},
+              onPressedFunction: () {
+                Navigator.popUntil(context, ModalRoute.withName(SignInPageRoute));
+              },
             );
           } else {
             showAlertFunction(
@@ -169,7 +183,9 @@ class SignUpPage extends StatelessWidget {
               message: "confirm_passwords".tr(),
               closingText: "close".tr(),
               affirmativeText: "try_again".tr(),
-              onPressedFunction:(){ Navigator.pop(context);},
+              onPressedFunction: () {
+                Navigator.pop(context);
+              },
             );
             // passwordsDifferentAlert(context);
           }
@@ -187,7 +203,10 @@ class SignUpPage extends StatelessWidget {
         child: Center(
           child: Text(
             'sign_up'.tr(),
-            style: TextStyle(fontSize: 15, color: Theme.of(context).secondaryHeaderColor,),
+            style: TextStyle(
+              fontSize: 15,
+              color: Theme.of(context).secondaryHeaderColor,
+            ),
           ),
         ),
       ),
