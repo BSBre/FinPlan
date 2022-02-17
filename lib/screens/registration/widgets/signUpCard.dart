@@ -1,7 +1,6 @@
 import 'package:finplan/authentication/user_auth.dart';
 import 'package:finplan/bloc/sign_up_bloc/sign_up_bloc.dart';
 import 'package:finplan/bloc/sign_up_bloc/sign_up_state.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -58,7 +57,7 @@ class _SignUpCardState extends State<SignUpCard> {
               width: widget.containerWidth,
               height: 50,
               decoration: BoxDecoration(
-                color: Colors.grey.shade400,
+                color: Theme.of(context).colorScheme.secondary,
                 borderRadius: BorderRadius.circular(25),
               ),
               child: Padding(
@@ -67,15 +66,17 @@ class _SignUpCardState extends State<SignUpCard> {
                   keyboardType: TextInputType.emailAddress,
                   controller: widget.controller,
                   obscureText: widget.hidden,
+                  
                   decoration: InputDecoration(
+                    
                       icon: FaIcon(
                         widget.icon,
                         size: 20,
-                        color: Colors.deepPurple,
+                        color: Theme.of(context).primaryColor,
                       ),
                       border: InputBorder.none,
                       hintText: widget.title,
-                      hintStyle: TextStyle(fontSize: 15)),
+                      hintStyle: TextStyle(fontSize: 15,color: Theme.of(context).primaryColor,),),
                 ),
               ),
             ),

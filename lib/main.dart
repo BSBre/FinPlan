@@ -8,6 +8,7 @@ import 'package:finplan/config/navigation/app_router.dart';
 import 'package:finplan/screens/home/homeScreen.dart';
 import 'package:finplan/screens/no_internet/no_internet_screen.dart';
 import 'package:finplan/screens/registration/signInScreen.dart';
+import 'package:finplan/utilities/theme_data.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:finplan/values/constants.dart';
@@ -86,12 +87,9 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: ThemeData(
-        primaryColor: FinPlanColor,
-        colorScheme: ColorScheme.light(
-          primary: FinPlanColor,
-        ),
-      ),
+      themeMode: ThemeMode.system,
+      theme: MyThemes.lightTheme,
+      darkTheme: MyThemes.darkTheme,
       debugShowCheckedModeBanner: false,
       supportedLocales: context.supportedLocales,
       localizationsDelegates: context.localizationDelegates,

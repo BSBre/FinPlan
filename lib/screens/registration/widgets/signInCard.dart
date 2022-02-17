@@ -55,24 +55,27 @@ class _SignInCardState extends State<SignInCard> {
             width: MediaQuery.of(context).size.width - 60,
             height: 50,
             decoration: BoxDecoration(
-              color: Colors.grey.shade400,
               borderRadius: BorderRadius.circular(25),
+              color:  Theme.of(context).colorScheme.secondary,
             ),
             child: Padding(
               padding: EdgeInsets.symmetric(vertical: 0, horizontal: 15),
               child: TextFormField(
                 keyboardType: TextInputType.emailAddress,
+                
                 controller: widget.controller,
                 obscureText: widget.hidden,
                 decoration: InputDecoration(
+                  
                     icon: FaIcon(
                       widget.icon,
                       size: 20,
-                      color: Colors.deepPurple,
+                      color: Theme.of(context).primaryColor,
                     ),
                     border: InputBorder.none,
                     hintText: widget.title,
-                    hintStyle: TextStyle(fontSize: 15)),
+                    fillColor: Theme.of(context).primaryColor,
+                    hintStyle: TextStyle(fontSize: 15, color: Theme.of(context).primaryColor,)),
               ),
             ),
           );

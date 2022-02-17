@@ -22,13 +22,18 @@ class SignInPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
       bottomNavigationBar: Padding(
         padding: EdgeInsets.only(bottom: 25),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text('no_account'.tr(), style: TextStyle(fontSize: 15, color: Colors.deepPurple)),
+            Text(
+              'no_account'.tr(),
+              style: TextStyle(
+                fontSize: 15,
+                color: Theme.of(context).primaryColor,
+              ),
+            ),
             InkWell(
               onTap: () {
                 Navigator.of(context).pushNamed(SignUpPageRoute);
@@ -37,8 +42,8 @@ class SignInPage extends StatelessWidget {
                 'sign_up'.tr(),
                 style: TextStyle(
                   fontSize: 15,
-                  color: Colors.deepPurple,
                   fontWeight: FontWeight.bold,
+                  color: Theme.of(context).primaryColor,
                 ),
               ),
             ),
@@ -56,7 +61,11 @@ class SignInPage extends StatelessWidget {
               children: [
                 Text(
                   'FinPlan',
-                  style: TextStyle(color: Colors.black, fontSize: 25, fontWeight: FontWeight.bold),
+                  style: TextStyle(
+                    fontSize: 25,
+                    fontWeight: FontWeight.bold,
+                    color: Theme.of(context).primaryColor,
+                  ),
                 ),
                 SizedBox(height: 15),
                 UnDraw(
@@ -65,7 +74,8 @@ class SignInPage extends StatelessWidget {
                   color: Colors.deepPurple,
                   illustration: UnDrawIllustration.online_banking,
                   placeholder: CircularProgressIndicator(),
-                  errorWidget: Icon(Icons.error_outline, color: Colors.red, size: 50),
+                  errorWidget:
+                      Icon(Icons.error_outline, color: Colors.red, size: 50),
                 ),
                 SizedBox(height: 25),
                 SignInCard(
@@ -87,12 +97,19 @@ class SignInPage extends StatelessWidget {
                 ),
                 SizedBox(height: 15),
                 signInButton(context),
-                TextButton(onPressed: (){
-                  context.setLocale(Locale('en', 'US'));
-                }, child: Text("English")),
-                TextButton(onPressed: (){
-                  context.setLocale(Locale('sr', 'SR'));
-                }, child: Text("Serbian")),
+                TextButton(
+                  onPressed: () {
+                    context.setLocale(Locale('en', 'US'));
+                  },
+                  child: Text(
+                    "English",
+                  ),
+                ),
+                TextButton(
+                    onPressed: () {
+                      context.setLocale(Locale('sr', 'SR'));
+                    },
+                    child: Text("Serbian")),
               ],
             ),
           ),
@@ -105,7 +122,8 @@ class SignInPage extends StatelessWidget {
     return InkWell(
       onTap: () async {
         try {
-          await _auth.signInWithEmailAndPassword(email: _emailController.text, password: _pwdController.text);
+          await _auth.signInWithEmailAndPassword(
+              email: _emailController.text, password: _pwdController.text);
           print(_auth.currentUser?.uid);
           Navigator.of(context).pop();
           Navigator.of(context).pushNamed(IntroScreenRoute);
@@ -117,13 +135,16 @@ class SignInPage extends StatelessWidget {
         width: MediaQuery.of(context).size.width - 60,
         height: 60,
         decoration: BoxDecoration(
-          color: Colors.deepPurple.shade400,
           borderRadius: BorderRadius.circular(35),
+          color: Theme.of(context).primaryColor,
         ),
         child: Center(
           child: Text(
             'log_in'.tr(),
-            style: TextStyle(fontSize: 15, color: Colors.white),
+            style: TextStyle(
+              fontSize: 15,
+              color: Theme.of(context).secondaryHeaderColor,
+            ),
           ),
         ),
       ),

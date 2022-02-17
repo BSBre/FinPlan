@@ -23,14 +23,14 @@ class _IntroScreenState extends State<IntroScreen> {
         title: "intro_title1".tr(),
         maxLineTitle: 1,
         styleTitle: TextStyle(
-          color: Colors.white,
           fontSize: 30.0,
           fontWeight: FontWeight.bold,
+          color: FinPlanDarkSecondayColor,
         ),
         description: "intro_description1".tr(),
         styleDescription: TextStyle(
-          color: Colors.white,
           fontSize: 20.0,
+          color: FinPlanDarkSecondayColor,
         ),
         backgroundImage: "assets/images/intro1.jpg",
       ),
@@ -39,14 +39,14 @@ class _IntroScreenState extends State<IntroScreen> {
       new Slide(
         title: "intro_title2".tr(),
         styleTitle: TextStyle(
-          color: Colors.white,
           fontSize: 30.0,
           fontWeight: FontWeight.bold,
+          color: FinPlanDarkSecondayColor,
         ),
         description: "intro_description2".tr(),
         styleDescription: TextStyle(
-          color: Colors.white,
           fontSize: 20.0,
+          color: FinPlanDarkSecondayColor,
         ),
         backgroundImage: "assets/images/intro2.jpg",
       ),
@@ -55,14 +55,14 @@ class _IntroScreenState extends State<IntroScreen> {
       new Slide(
         title: "intro_title3".tr(),
         styleTitle: TextStyle(
-          color: Colors.white,
           fontSize: 30.0,
           fontWeight: FontWeight.bold,
+          color: FinPlanDarkSecondayColor,
         ),
         description: "intro_description3".tr(),
         styleDescription: TextStyle(
-          color: Colors.white,
           fontSize: 20.0,
+          color: FinPlanDarkSecondayColor,
         ),
         backgroundImage: "assets/images/intro3.jpg",
       ),
@@ -82,7 +82,7 @@ class _IntroScreenState extends State<IntroScreen> {
     return Text(
       "next".tr(),
       style: TextStyle(
-        color: Colors.white,
+        color: Theme.of(context).secondaryHeaderColor,
       ),
     );
   }
@@ -91,7 +91,7 @@ class _IntroScreenState extends State<IntroScreen> {
     return Text(
       "done".tr(),
       style: TextStyle(
-        color: Colors.white,
+        color: Theme.of(context).secondaryHeaderColor,
       ),
     );
   }
@@ -100,7 +100,7 @@ class _IntroScreenState extends State<IntroScreen> {
     return Text(
       "skip".tr(),
       style: TextStyle(
-        color: Colors.white,
+        color: Theme.of(context).secondaryHeaderColor,
       ),
     );
   }
@@ -108,8 +108,12 @@ class _IntroScreenState extends State<IntroScreen> {
   ButtonStyle myButtonStyle() {
     return ButtonStyle(
       shape: MaterialStateProperty.all<OutlinedBorder>(StadiumBorder()),
-      backgroundColor: MaterialStateProperty.all<Color>(FinPlanColor),
-      overlayColor: MaterialStateProperty.all<Color>(FinPlanColor),
+      backgroundColor: MaterialStateProperty.all<Color>(
+        Theme.of(context).primaryColor,
+      ),
+      overlayColor: MaterialStateProperty.all<Color>(
+        Theme.of(context).secondaryHeaderColor,
+      ),
     );
   }
 
@@ -134,9 +138,9 @@ class _IntroScreenState extends State<IntroScreen> {
       doneButtonStyle: myButtonStyle(),
 
       // Dot indicator
-      colorDot: FinPlanColor,
-      colorActiveDot: Colors.white,
-      sizeDot: 13.0,
+      colorDot: Theme.of(context).primaryColor,
+      colorActiveDot: Theme.of(context).secondaryHeaderColor,
+      sizeDot: 10.0,
 
       // Show or hide status bar
       hideStatusBar: true,

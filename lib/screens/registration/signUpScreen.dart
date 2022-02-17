@@ -4,7 +4,6 @@ import 'package:finplan/bloc/sign_up_bloc/sign_up_bloc.dart';
 import 'package:finplan/config/models/alertDialog_model.dart';
 import 'package:finplan/screens/registration/widgets/signUpCard.dart';
 import 'package:finplan/values/constants.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ms_undraw/ms_undraw.dart';
@@ -28,20 +27,20 @@ class SignUpPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Theme.of(context).backgroundColor,
       bottomNavigationBar: Padding(
         padding: EdgeInsets.only(bottom: 25),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text('yes_account'.tr(), style: TextStyle(fontSize: 15, color: Colors.deepPurple)),
+            Text('yes_account'.tr(), style: TextStyle(fontSize: 15, color: Theme.of(context).primaryColor,),),
             InkWell(
               onTap: () {
                 Navigator.of(context).pop();
               },
               child: Text(
                 'log_in'.tr(),
-                style: TextStyle(fontSize: 15, color: Colors.deepPurple, fontWeight: FontWeight.bold),
+                style: TextStyle(fontSize: 15, color: Theme.of(context).primaryColor, fontWeight: FontWeight.bold,),
               ),
             ),
           ],
@@ -62,13 +61,13 @@ class SignUpPage extends StatelessWidget {
                 children: [
                   Text(
                     'hello'.tr(),
-                    style: TextStyle(color: Colors.black, fontSize: 25, fontWeight: FontWeight.bold),
+                    style: TextStyle(color: Theme.of(context).primaryColor, fontSize: 25, fontWeight: FontWeight.bold),
                   ),
                   SizedBox(height: 15),
                   UnDraw(
                     height: 150,
                     width: 150,
-                    color: Colors.deepPurple,
+                    color: Theme.of(context).primaryColor,
                     illustration: UnDrawIllustration.online_banking,
                     placeholder: CircularProgressIndicator(),
                     errorWidget: Icon(Icons.error_outline, color: Colors.red, size: 50),
@@ -182,13 +181,13 @@ class SignUpPage extends StatelessWidget {
         width: double.infinity,
         height: 60,
         decoration: BoxDecoration(
-          color: Colors.deepPurple.shade400,
+          color: Theme.of(context).primaryColor,
           borderRadius: BorderRadius.circular(35),
         ),
         child: Center(
           child: Text(
             'sign_up'.tr(),
-            style: TextStyle(fontSize: 15, color: Colors.white),
+            style: TextStyle(fontSize: 15, color: Theme.of(context).secondaryHeaderColor,),
           ),
         ),
       ),

@@ -59,9 +59,9 @@ class _HomeScreenState extends State<HomeScreen> {
                   Radius.circular(25),
                 ),
               ),
-              snakeViewColor: FinPlanColor,
-              selectedItemColor: FinPlanColor,
-              unselectedItemColor: Colors.grey,
+              snakeViewColor: Theme.of(context).primaryColor,
+              selectedItemColor: Theme.of(context).primaryColor,
+              unselectedItemColor: Theme.of(context).secondaryHeaderColor,
               currentIndex: selectedItemPosition,
               //TODO Uraditi sa bloc-om setState
               onTap: (index) {
@@ -77,7 +77,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 BottomNavigationBarItem(icon: Icon(Icons.account_circle), label: 'profile'),
               ],
             ),
-            backgroundColor: Colors.white,
+            backgroundColor: Theme.of(context).backgroundColor,
             body: pages[selectedItemPosition],
           );
         }
