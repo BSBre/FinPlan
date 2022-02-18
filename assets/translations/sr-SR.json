@@ -34,5 +34,7 @@
   "skip": "Preskoci",
   "close": "Zatvori",
   "try_again": "Opet",
-  "send": "Posalji"
+  "send": "Posalji",
+  "language_picker": "RS",
+  "profile": "Profil"
 }

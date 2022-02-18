@@ -1,6 +1,17 @@
 import 'package:finplan/values/constants.dart';
 import 'package:flutter/material.dart';
 
+class ThemeProvider extends ChangeNotifier {
+  ThemeMode themeMode = ThemeMode.light;
+
+  bool get isDarkMode => themeMode == ThemeMode.dark;
+
+  void toggleTheme (bool isOn) {
+    themeMode = isOn ? ThemeMode.dark : ThemeMode.light;
+    notifyListeners();
+  }
+}
+
 class MyThemes {
   static final darkTheme = ThemeData(
     primaryColor: ComplimentaryColor,
@@ -13,6 +24,7 @@ class MyThemes {
     secondaryHeaderColor: DarkModeSecondaryColor,
     textButtonTheme: TextButtonThemeData(
       style: ButtonStyle(
+
         foregroundColor: MaterialStateProperty.all<Color>(ComplimentaryColor),
       ),
     ),

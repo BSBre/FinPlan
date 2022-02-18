@@ -9,6 +9,7 @@ const String SignInPageRoute = '/';
 const String CalendarPageRoute = '/CalendarPage';
 const String PaymentPageRoute = '/PaymentPage';
 const String IntroScreenRoute = '/IntroScreen';
+const String ProfilePageRoute = '/ProfilePage';
 
 
 //COLORS

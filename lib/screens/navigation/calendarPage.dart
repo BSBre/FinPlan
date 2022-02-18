@@ -188,9 +188,9 @@ class _CalendarPageState extends State<CalendarPage> with TickerProviderStateMix
 
   void _addNewEventBottomSheet(BuildContext context) {
     TextEditingController descriptionController = TextEditingController();
-    TextEditingController dateinput = TextEditingController();
+    TextEditingController dateInput = TextEditingController();
     TextEditingController timeInput = TextEditingController();
-    dateinput.text = "";
+    dateInput.text = "";
     timeInput.text = "";
 
     DateTime? pickedDate;
@@ -229,7 +229,7 @@ class _CalendarPageState extends State<CalendarPage> with TickerProviderStateMix
               ),
               Container(
                 child: TextField(
-                  controller: dateinput,
+                  controller: dateInput,
                   decoration: InputDecoration(
                       focusColor: PrimaryColor,
                       prefixIconColor: PrimaryColor,
@@ -252,7 +252,7 @@ class _CalendarPageState extends State<CalendarPage> with TickerProviderStateMix
                       selectedMonth = pickedDate?.month;
 
                       setState(() {
-                        dateinput.text = formattedDate;
+                        dateInput.text = formattedDate;
                       });
                     } else {
                       print("Date is not selected");

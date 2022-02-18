@@ -99,19 +99,19 @@ class SignInPage extends StatelessWidget {
                 ),
                 SizedBox(height: 15),
                 signInButton(context),
-                TextButton(
-                  onPressed: () {
-                    context.setLocale(Locale('en', 'US'));
-                  },
-                  child: Text(
-                    "English",
-                  ),
-                ),
-                TextButton(
-                    onPressed: () {
-                      context.setLocale(Locale('sr', 'SR'));
-                    },
-                    child: Text("Serbian")),
+                // TextButton(
+                //   onPressed: () {
+                //     context.setLocale(Locale('en', 'US'));
+                //   },
+                //   child: Text(
+                //     "English",
+                //   ),
+                // ),
+                // TextButton(
+                //     onPressed: () {
+                //       context.setLocale(Locale('sr', 'SR'));
+                //     },
+                //     child: Text("Serbian")),
               ],
             ),
           ),

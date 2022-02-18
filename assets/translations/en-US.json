@@ -34,5 +34,7 @@
   "skip": "Skip",
   "close": "Close",
   "try_again": "Try again",
-  "send": "Send"
+  "send": "Send",
+  "language_picker": "EN",
+  "profile": "Profile"
 }
