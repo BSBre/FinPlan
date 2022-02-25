@@ -83,7 +83,8 @@ class SignUpPage extends StatelessWidget {
                     color: Theme.of(context).primaryColor,
                     illustration: UnDrawIllustration.online_banking,
                     placeholder: CircularProgressIndicator(),
-                    errorWidget: Icon(Icons.error_outline, color: Colors.red, size: 50),
+                    errorWidget:
+                        Icon(Icons.error_outline, color: Colors.red, size: 50),
                   ),
                   SizedBox(height: 10),
                   SignUpCard(
@@ -155,8 +156,35 @@ class SignUpPage extends StatelessWidget {
     return InkWell(
       onTap: () async {
         try {
-          if (_pwdController.text == _confirmPwdController.text) {
-            final data = await _auth.createUserWithEmailAndPassword(email: _emailController.text, password: _pwdController.text);
+          if (_firstNameController.text == "" ||
+              _lastNameController.text == "" ||
+              _pwdController.text == "" ||
+              _confirmPwdController.text == "" ||
+              _emailController.text == "") {
+            showAlertFunction(
+              buildContext: context,
+              title: "fields-empty".tr(),
+              message: "fields-empty-message".tr(),
+              closingText: "close".tr(),
+              affirmativeText: "try_again".tr(),
+              onPressedFunction: () {
+                Navigator.of(context).pop();
+              },
+            );
+          } else if (_pwdController.text != _confirmPwdController.text) {
+            showAlertFunction(
+              buildContext: context,
+              title: "passwords_not_same".tr(),
+              message: "confirm_passwords".tr(),
+              closingText: "close".tr(),
+              affirmativeText: "try_again".tr(),
+              onPressedFunction: () {
+                Navigator.pop(context);
+              },
+            );
+          } else {
+            final data = await _auth.createUserWithEmailAndPassword(
+                email: _emailController.text, password: _pwdController.text);
 
             FirebaseApi.addItem(
                 userEmail: _emailController.text,
@@ -173,21 +201,10 @@ class SignUpPage extends StatelessWidget {
               closingText: "close".tr(),
               affirmativeText: "log_in".tr(),
               onPressedFunction: () {
-                Navigator.popUntil(context, ModalRoute.withName(SignInPageRoute));
+                Navigator.popUntil(
+                    context, ModalRoute.withName(SignInPageRoute));
               },
             );
-          } else {
-            showAlertFunction(
-              buildContext: context,
-              title: "passwords_not_same".tr(),
-              message: "confirm_passwords".tr(),
-              closingText: "close".tr(),
-              affirmativeText: "try_again".tr(),
-              onPressedFunction: () {
-                Navigator.pop(context);
-              },
-            );
-            // passwordsDifferentAlert(context);
           }
         } catch (e) {
           print(e.toString());

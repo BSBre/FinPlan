@@ -36,5 +36,15 @@
   "try_again": "Opet",
   "send": "Posalji",
   "language_picker": "RS",
-  "profile": "Profil"
+  "profile": "Profil",
+  "fields-empty": "Neka polja su prazna!",
+  "fields-empty-message": "Neka polja su prazna, molimo Vas proverite da li su sva polja popunjena pre nego sto probate ponovo",
+  "email-wrong-format": "Imejl je lose formatiran",
+  "email-format-correctly": "Pravilno formatirajte imejl",
+  "no-user": "Korisnik ne postoji",
+  "no-user-message": "Korisnik ne postoji u bazi, molimo vas registrujte se",
+  "password-bad": "Neispravna sifra",
+  "password-bad-message": "Sifra je netacna ili neispravna",
+  "forgot-password": "Zaboravljena lozinka? ",
+  "reset": "Promenite je"
 }

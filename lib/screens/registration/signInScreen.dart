@@ -1,5 +1,6 @@
 import 'package:finplan/authentication/user_auth.dart';
 import 'package:finplan/bloc/sign_in_bloc/sign_in_bloc.dart';
+import 'package:finplan/config/models/alertDialog_model.dart';
 import 'package:finplan/screens/registration/widgets/signInCard.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -104,9 +105,9 @@ class SignInPage extends StatelessWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text("Forgot password? "),
+                      Text("forgot-password".tr()),
                       Text(
-                        "Reset it",
+                        "reset".tr(),
                         style: TextStyle(fontWeight: FontWeight.bold),
                       ),
                     ],
@@ -127,11 +128,70 @@ class SignInPage extends StatelessWidget {
     return InkWell(
       onTap: () async {
         try {
-          await _auth.signInWithEmailAndPassword(email: _emailController.text, password: _pwdController.text);
-          Navigator.of(context).pop();
-          Navigator.of(context).pushNamed(IntroScreenRoute);
+          if (_emailController.text == "" || _pwdController.text == "") {
+            showAlertFunction(
+              buildContext: context,
+              title: "fields-empty".tr(),
+              message: "fields-empty-message".tr(),
+              closingText: "close".tr(),
+              affirmativeText: "try_again".tr(),
+              onPressedFunction: () {
+                Navigator.of(context).pop();
+              },
+            );
+          }
+          else{
+            await _auth.signInWithEmailAndPassword(
+                email: _emailController.text, password: _pwdController.text);
+            Navigator.of(context).pop();
+            Navigator.of(context).pushNamed(IntroScreenRoute);
+          }
+
         } catch (e) {
-          print(e.toString());
+          if (e.toString().substring(
+                  e.toString().indexOf(' ') + 1, e.toString().length) ==
+              "The email address is badly formatted.") {
+            showAlertFunction(
+              buildContext: context,
+              title: "email-wrong-format".tr(),
+              message: "email-format-correctly".tr(),
+              closingText: "close".tr(),
+              affirmativeText: "try_again".tr(),
+              onPressedFunction: () {
+                Navigator.of(context).pop();
+              },
+            );
+          } else if (e.toString().substring(
+                  e.toString().indexOf(' ') + 1, e.toString().length) ==
+              "There is no user record corresponding to this identifier. The user may have been deleted.") {
+            showAlertFunction(
+              buildContext: context,
+              title: "no-user".tr(),
+              message: "no-user-message".tr(),
+              closingText: "close".tr(),
+              affirmativeText: "try_again".tr(),
+              onPressedFunction: () {
+                Navigator.of(context).pop();
+              },
+            );
+          } else if (e.toString().substring(
+                  e.toString().indexOf(' ') + 1, e.toString().length) ==
+              "The password is invalid or the user does not have a password.") {
+            showAlertFunction(
+              buildContext: context,
+              title: "password-bad".tr(),
+              message: "password-bad-message".tr(),
+              closingText: "close".tr(),
+              affirmativeText: "try_again".tr(),
+              onPressedFunction: () {
+                Navigator.of(context).pop();
+              },
+            );
+          }
+
+          print(e
+              .toString()
+              .substring(e.toString().indexOf(' ') + 1, e.toString().length));
         }
       },
       child: Container(
