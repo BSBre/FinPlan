@@ -23,12 +23,12 @@ class SignUpCard extends StatefulWidget {
 
 class _SignUpCardState extends State<SignUpCard> {
   //PROVERITI DA LI TREBA LATE ILI KONSTRUKTOR
-  late SignUpBloc _signUpBloc;
+  //late SignUpBloc _signUpBloc;
 
   @override
   void initState() {
     super.initState();
-    _signUpBloc = BlocProvider.of<SignUpBloc>(context);
+    //_signUpBloc = BlocProvider.of<SignUpBloc>(context);
   }
 
   @override

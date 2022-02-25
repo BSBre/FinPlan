@@ -1,7 +1,7 @@
 import 'package:easy_localization/src/public_ext.dart';
 import 'package:finplan/utilities/theme_data.dart';
 import 'package:finplan/values/constants.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -13,13 +13,12 @@ class ProfilePage extends StatefulWidget {
 class _ProfilePageState extends State<ProfilePage> {
   bool isDark = false;
 
+  final user = FirebaseAuth.instance;
   @override
   void initState() {
     if (ThemeMode.dark == true) {
       isDark = true;
-    } else if (ThemeMode.light == true) {
-      isDark = false;
-    } else {
+    } else{
       isDark = false;
     }
     super.initState();
@@ -124,7 +123,7 @@ class _ProfilePageState extends State<ProfilePage> {
               ),
               Container(
                 child: Text(
-                  "Marko Radovic",
+                  "",
                   style: TextStyle(fontSize: 36, fontWeight: FontWeight.bold),
                 ),
               ),

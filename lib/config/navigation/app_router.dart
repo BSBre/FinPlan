@@ -4,9 +4,9 @@ import 'package:finplan/screens/intro/intro_screen.dart';
 import 'package:finplan/screens/navigation/calendarPage.dart';
 import 'package:finplan/screens/navigation/paymentPage.dart';
 import 'package:finplan/screens/navigation/profilePage.dart';
+import 'package:finplan/screens/registration/passwordResetScreen.dart';
 import 'package:finplan/screens/registration/signInScreen.dart';
 import 'package:finplan/screens/registration/signUpScreen.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:finplan/values/constants.dart';
 
@@ -29,6 +29,8 @@ class AppRouter {
         return MaterialPageRoute(builder: (_) => IntroScreen());
       case ProfilePageRoute:
         return MaterialPageRoute(builder: (_) => ProfilePage());
+      case PasswordResetScreenRoute:
+        return MaterialPageRoute(builder: (_) => PasswordResetScreen());
       default:
         return _errorRoute();
     }

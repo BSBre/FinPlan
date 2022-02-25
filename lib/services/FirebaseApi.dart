@@ -35,7 +35,11 @@ class FirebaseApi {
 
     
   }
+  static Future<void> getUserFirstAndLastName() async {
+    DocumentReference userDocument = _dataBase.collection('users').doc(userId);
 
+    //await userDocument.get()
+  }
 
   static Future<void> createNotification({
     required String notificationTitle,

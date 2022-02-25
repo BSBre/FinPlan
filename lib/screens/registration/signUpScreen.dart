@@ -12,13 +12,13 @@ import 'package:finplan/services/FirebaseApi.dart';
 
 class SignUpPage extends StatelessWidget {
   final _auth = FirebaseAuth.instance;
-  TextEditingController _emailController = TextEditingController();
-  TextEditingController _pwdController = TextEditingController();
-  TextEditingController _confirmPwdController = TextEditingController();
-  TextEditingController _firstNameController = TextEditingController();
-  TextEditingController _lastNameController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _pwdController = TextEditingController();
+  final TextEditingController _confirmPwdController = TextEditingController();
+  final TextEditingController _firstNameController = TextEditingController();
+  final TextEditingController _lastNameController = TextEditingController();
 
-  UserAuth _userAuth;
+  final UserAuth _userAuth;
 
   SignUpPage({Key? key, required UserAuth userAuth})
       : _userAuth = userAuth,

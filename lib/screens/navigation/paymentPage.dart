@@ -67,6 +67,8 @@ class _QRViewExampleState extends State<QRViewExample> {
                               await controller?.toggleFlash();
                               setState(() {});
                             },
+
+                            style: ButtonStyle(backgroundColor: MaterialStateProperty.all(Theme.of(context).primaryColor),),
                             child: FutureBuilder(
                               future: controller?.getFlashStatus(),
                               builder: (context, snapshot) {
@@ -81,6 +83,8 @@ class _QRViewExampleState extends State<QRViewExample> {
                               await controller?.flipCamera();
                               setState(() {});
                             },
+
+                            style: ButtonStyle(backgroundColor: MaterialStateProperty.all(Theme.of(context).primaryColor),),
                             child: FutureBuilder(
                               future: controller?.getCameraInfo(),
                               builder: (context, snapshot) {
@@ -105,6 +109,7 @@ class _QRViewExampleState extends State<QRViewExample> {
                           onPressed: () async {
                             await controller?.pauseCamera();
                           },
+                          style: ButtonStyle(backgroundColor: MaterialStateProperty.all(Theme.of(context).primaryColor),),
                           child: const Text('pause',
                               style: TextStyle(fontSize: 20)),
                         ),
@@ -115,6 +120,8 @@ class _QRViewExampleState extends State<QRViewExample> {
                           onPressed: () async {
                             await controller?.resumeCamera();
                           },
+
+                          style: ButtonStyle(backgroundColor: MaterialStateProperty.all(Theme.of(context).primaryColor),),
                           child: const Text('resume',
                               style: TextStyle(fontSize: 20)),
                         ),

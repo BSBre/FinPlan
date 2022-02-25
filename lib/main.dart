@@ -6,8 +6,6 @@ import 'package:finplan/bloc/authentication_bloc/authentication_state.dart';
 import 'package:finplan/bloc/bloc_observer.dart';
 import 'package:finplan/config/navigation/app_router.dart';
 import 'package:finplan/screens/home/homeScreen.dart';
-import 'package:finplan/screens/navigation/calendarPage.dart';
-import 'package:finplan/screens/navigation/profilePage.dart';
 import 'package:finplan/screens/no_internet/no_internet_screen.dart';
 import 'package:finplan/screens/registration/signInScreen.dart';
 import 'package:finplan/utilities/theme_data.dart';
@@ -57,7 +55,6 @@ void main() async {
     () => runApp(
       BlocProvider(
         child: EasyLocalization(
-
           startLocale: Locale('sr', 'SR'),
           path: 'assets/translations',
           supportedLocales: [
@@ -90,42 +87,42 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider<ThemeProvider>(
-        create: (context) => ThemeProvider(),
-        builder: (context, _) {
-          final themeProvider = Provider.of<ThemeProvider>(context);
-          return MaterialApp(
-            themeMode: themeProvider.themeMode,
-            theme: MyThemes.lightTheme,
-            darkTheme: MyThemes.darkTheme,
-            debugShowCheckedModeBanner: false,
-            supportedLocales: context.supportedLocales,
-            localizationsDelegates: context.localizationDelegates,
-            locale: context.locale,
-            home: StreamBuilder(
-              stream: Connectivity().onConnectivityChanged,
-              builder: (BuildContext context, AsyncSnapshot<ConnectivityResult> snapshot) {
-                if (snapshot.data != ConnectivityResult.none) {
-                  return BlocBuilder<AuthenticationBloc, AuthenticationState>(
-                    builder: (context, state) {
-                      if (state is AuthenticationFailure) {
-                        return SignInPage(userAuth: widget._userAuth);
-
-                      } else if (state is AuthenticationSuccess) {
-                        return HomeScreen();
-                      } else {
-                        return SignInPage(userAuth: widget._userAuth);
-                      }
-                    },
-                  );
-                } else {
-                  return NoInternetScreen();
-                }
-              },
-            ),
-            onGenerateRoute: AppRouter(userAuth: widget._userAuth).onGenerateRoute,
-            initialRoute: SignInPageRoute,
-          );
-        });
+      create: (context) => ThemeProvider(),
+      builder: (context, _) {
+        final themeProvider = Provider.of<ThemeProvider>(context);
+        return MaterialApp(
+          themeMode: themeProvider.themeMode,
+          theme: MyThemes.lightTheme,
+          darkTheme: MyThemes.darkTheme,
+          debugShowCheckedModeBanner: false,
+          supportedLocales: context.supportedLocales,
+          localizationsDelegates: context.localizationDelegates,
+          locale: context.locale,
+          home: StreamBuilder(
+            stream: Connectivity().onConnectivityChanged,
+            builder: (BuildContext context, AsyncSnapshot<ConnectivityResult> snapshot) {
+              if (snapshot.data != ConnectivityResult.none) {
+                return BlocBuilder<AuthenticationBloc, AuthenticationState>(
+                  builder: (context, state) {
+                    if (state is AuthenticationFailure) {
+                      return SignInPage(userAuth: widget._userAuth);
+                    } else if (state is AuthenticationSuccess) {
+                      return HomeScreen();
+                    } else {
+                      return SignInPage(userAuth: widget._userAuth);
+                    }
+                  },
+                );
+              } else {
+                return NoInternetScreen();
+              }
+            },
+          ),
+          onGenerateRoute: AppRouter(userAuth: widget._userAuth).onGenerateRoute,
+          initialRoute: SignInPageRoute,
+        );
+      },
+    );
   }
 }
 

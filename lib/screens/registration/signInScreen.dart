@@ -99,19 +99,22 @@ class SignInPage extends StatelessWidget {
                 ),
                 SizedBox(height: 15),
                 signInButton(context),
-                // TextButton(
-                //   onPressed: () {
-                //     context.setLocale(Locale('en', 'US'));
-                //   },
-                //   child: Text(
-                //     "English",
-                //   ),
-                // ),
-                // TextButton(
-                //     onPressed: () {
-                //       context.setLocale(Locale('sr', 'SR'));
-                //     },
-                //     child: Text("Serbian")),
+                SizedBox(height: 15),
+                GestureDetector(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text("Forgot password? "),
+                      Text(
+                        "Reset it",
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                    ],
+                  ),
+                  onTap: () async {
+                    Navigator.pushNamed(context, PasswordResetScreenRoute);
+                  },
+                )
               ],
             ),
           ),
@@ -125,7 +128,6 @@ class SignInPage extends StatelessWidget {
       onTap: () async {
         try {
           await _auth.signInWithEmailAndPassword(email: _emailController.text, password: _pwdController.text);
-          print(_auth.currentUser?.uid);
           Navigator.of(context).pop();
           Navigator.of(context).pushNamed(IntroScreenRoute);
         } catch (e) {

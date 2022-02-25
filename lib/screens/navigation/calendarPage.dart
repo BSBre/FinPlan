@@ -6,7 +6,6 @@ import 'package:finplan/config/models/notification_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
-import 'package:finplan/values/constants.dart';
 import 'package:finplan/services/FirebaseApi.dart';
 
 class CalendarPage extends StatefulWidget {
@@ -94,10 +93,6 @@ class _CalendarPageState extends State<CalendarPage> with TickerProviderStateMix
           RawMaterialButton(
             onPressed: () {
               _addNewEventBottomSheet(context);
-              print(user.currentUser?.tenantId);
-              print(user.currentUser?.uid);
-              print(user.currentUser);
-              print(user.currentUser?.displayName);
             },
             child: Container(
                 width: 30,
@@ -157,7 +152,6 @@ class _CalendarPageState extends State<CalendarPage> with TickerProviderStateMix
             availableCalendarFormats: {CalendarFormat.month: "Month"},
             availableGestures: AvailableGestures.all,
             onFormatChanged: null,
-
             calendarFormat: CalendarFormat.month,
             firstDay: DateTime.utc(2020, 1, 1),
             lastDay: DateTime.utc(2030, 1, 1),
@@ -170,9 +164,10 @@ class _CalendarPageState extends State<CalendarPage> with TickerProviderStateMix
                 shape: BoxShape.rectangle,
                 color: Theme.of(context).secondaryHeaderColor,
               ),
-              weekendTextStyle: TextStyle(color: Theme.of(context).primaryColor,),
+              weekendTextStyle: TextStyle(
+                color: Theme.of(context).primaryColor,
+              ),
               outsideDaysVisible: false,
-
             ),
             onDaySelected: _onDaySelected,
           ),
@@ -201,11 +196,16 @@ class _CalendarPageState extends State<CalendarPage> with TickerProviderStateMix
     int? selectedMonth = 0;
     int? selectedDay = 0;
     showModalBottomSheet(
+      backgroundColor: Theme.of(context).backgroundColor,
       isScrollControlled: true,
       context: context,
       builder: (BuildContext bc) {
         return Padding(
-          padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom, left: 20, right: 20),
+          padding: EdgeInsets.only(
+            bottom: MediaQuery.of(context).viewInsets.bottom,
+            left: 20,
+            right: 20,
+          ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisSize: MainAxisSize.min,
@@ -218,7 +218,7 @@ class _CalendarPageState extends State<CalendarPage> with TickerProviderStateMix
                   "add_notification".tr(),
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                    color: PrimaryColor,
+                    color: Theme.of(context).primaryColor,
                     fontSize: 24,
                     fontWeight: FontWeight.bold,
                   ),
@@ -231,9 +231,9 @@ class _CalendarPageState extends State<CalendarPage> with TickerProviderStateMix
                 child: TextField(
                   controller: dateInput,
                   decoration: InputDecoration(
-                      focusColor: PrimaryColor,
-                      prefixIconColor: PrimaryColor,
-                      fillColor: PrimaryColor,
+                      focusColor: Theme.of(context).primaryColor,
+                      prefixIconColor: Theme.of(context).primaryColor,
+                      fillColor: Theme.of(context).primaryColor,
                       icon: Icon(Icons.calendar_today),
                       labelText: "enter_date".tr()),
                   readOnly: true,
@@ -243,6 +243,18 @@ class _CalendarPageState extends State<CalendarPage> with TickerProviderStateMix
                       initialDate: DateTime.now(),
                       firstDate: DateTime(2000),
                       lastDate: DateTime(2101),
+                      builder: (context, child) {
+                        return Theme(
+                          child: child!,
+                          data: Theme.of(context).copyWith(
+                            colorScheme: ColorScheme.light(
+                              primary: Theme.of(context).primaryColor,
+                              onSurface: Theme.of(context).secondaryHeaderColor,
+                            ),
+                            dialogBackgroundColor: Theme.of(context).backgroundColor,
+                          ),
+                        );
+                      },
                     );
 
                     if (pickedDate != null) {
@@ -267,12 +279,12 @@ class _CalendarPageState extends State<CalendarPage> with TickerProviderStateMix
                 children: <Widget>[
                   Expanded(
                     child: CustomFormField(
-                      fillColor: PrimaryColor,
+                      fillColor: Theme.of(context).primaryColor,
                       controller: titleController,
                       labelText: "title".tr(),
                       prefixIcon: Icon(
                         Icons.title,
-                        color: PrimaryColor,
+                        color: Theme.of(context).primaryColor,
                         size: 18,
                       ),
                       hintText: "title".tr(),
@@ -287,12 +299,12 @@ class _CalendarPageState extends State<CalendarPage> with TickerProviderStateMix
                 children: <Widget>[
                   Expanded(
                     child: CustomFormField(
-                      fillColor: PrimaryColor,
+                      fillColor: Theme.of(context).primaryColor,
                       controller: descriptionController,
                       labelText: "description".tr(),
                       prefixIcon: Icon(
                         Icons.title,
-                        color: PrimaryColor,
+                        color: Theme.of(context).primaryColor,
                         size: 18,
                       ),
                       hintText: "description".tr(),
@@ -306,10 +318,24 @@ class _CalendarPageState extends State<CalendarPage> with TickerProviderStateMix
               Container(
                 child: TextField(
                   controller: timeInput,
-                  decoration: InputDecoration(fillColor: PrimaryColor, icon: Icon(Icons.access_alarm), labelText: "Enter the time"),
+                  decoration: InputDecoration(fillColor: Theme.of(context).primaryColor, icon: Icon(Icons.access_alarm), labelText: "Enter the time"),
                   readOnly: true,
                   onTap: () async {
                     TimeOfDay? pickedTime = await showTimePicker(
+                      builder: (context, child) {
+                        return Theme(
+                          child: child!,
+                          data: Theme.of(context).copyWith(
+                            colorScheme: ColorScheme.light(
+                              surface: Theme.of(context).backgroundColor,
+                              //onBackground: Colors.red, //background of the watch
+                              primary: Theme.of(context).primaryColor,
+                              onSurface: Theme.of(context).primaryColor, //Color of numbers
+                            ),
+                            dialogBackgroundColor: Theme.of(context).backgroundColor,
+                          ),
+                        );
+                      },
                       context: context,
                       initialTime: TimeOfDay.fromDateTime(DateTime.now()),
                     );
@@ -353,7 +379,7 @@ class _CalendarPageState extends State<CalendarPage> with TickerProviderStateMix
                   child: Container(
                     padding: EdgeInsets.symmetric(vertical: 15),
                     decoration: BoxDecoration(
-                      color: PrimaryColor,
+                      color: Theme.of(context).primaryColor,
                       borderRadius: BorderRadius.circular(12),
                     ),
                     child: Center(

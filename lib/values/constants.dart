@@ -10,6 +10,7 @@ const String CalendarPageRoute = '/CalendarPage';
 const String PaymentPageRoute = '/PaymentPage';
 const String IntroScreenRoute = '/IntroScreen';
 const String ProfilePageRoute = '/ProfilePage';
+const String PasswordResetScreenRoute = '/PasswordResetScreen';
 
 
 //COLORS
@@ -22,5 +23,5 @@ const Color DarkModeAllBlackColor = Color(0xFF000000);
 const Color DarkModeBackgroundColor = Color(0xFF212121);
 const Color DarkModeSecondaryColor = Color(0xFF9E9E9E);
 
-const Color LightModeSecondaryColor = Color(0xFFE0E0E0);
+const Color LightModeSecondaryColor = Color(0xFFB3B3B3);
 const Color LightModeBackgroundColor = Color(0xFFF5F5F5);

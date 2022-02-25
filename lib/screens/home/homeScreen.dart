@@ -5,7 +5,6 @@ import 'package:finplan/screens/navigation/notificationPage.dart';
 import 'package:finplan/screens/navigation/paymentPage.dart';
 import 'package:finplan/screens/navigation/profilePage.dart';
 import 'package:finplan/screens/no_internet/no_internet_screen.dart';
-import 'package:finplan/values/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_snake_navigationbar/flutter_snake_navigationbar.dart';
@@ -36,6 +35,7 @@ class _HomeScreenState extends State<HomeScreen> {
       print(e);
     }
   }
+
   List<Widget> pages = [
     NotificationPage(),
     CalendarPage(),
@@ -43,11 +43,11 @@ class _HomeScreenState extends State<HomeScreen> {
     PaymentPage(),
     ProfilePage(),
   ];
+
   @override
   Widget build(BuildContext context) {
     return StreamBuilder(
       stream: Connectivity().onConnectivityChanged,
-
       builder: (BuildContext context, AsyncSnapshot<ConnectivityResult> snapshot) {
         if (snapshot.data != ConnectivityResult.none) {
           return Scaffold(
@@ -55,8 +55,9 @@ class _HomeScreenState extends State<HomeScreen> {
               behaviour: SnakeBarBehaviour.pinned,
               snakeShape: SnakeShape.indicator,
               shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.all(
-                  Radius.circular(25),
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(25),
+                  topRight: Radius.circular(25),
                 ),
               ),
               backgroundColor: Theme.of(context).bottomNavigationBarTheme.unselectedItemColor,
@@ -66,26 +67,42 @@ class _HomeScreenState extends State<HomeScreen> {
               currentIndex: selectedItemPosition,
               //TODO Uraditi sa bloc-om setState
               onTap: (index) {
-                setState(() {
-                  selectedItemPosition = index;
-                });
+                setState(
+                  () {
+                    selectedItemPosition = index;
+                  },
+                );
               },
               items: [
-                BottomNavigationBarItem(icon: Icon(Icons.notifications), label: 'notifications'),
-                BottomNavigationBarItem(icon: Icon(Icons.calendar_today), label: 'calendar'),
-                BottomNavigationBarItem(icon: Icon(Icons.home), label: 'home'),
-                BottomNavigationBarItem(icon: Icon(Icons.attach_money_sharp), label: 'payments'),
-                BottomNavigationBarItem(icon: Icon(Icons.account_circle), label: 'profile'),
+                BottomNavigationBarItem(
+                  icon: Icon(Icons.notifications),
+                  label: 'notifications',
+                ),
+                BottomNavigationBarItem(
+                  icon: Icon(Icons.calendar_today),
+                  label: 'calendar',
+                ),
+                BottomNavigationBarItem(
+                  icon: Icon(Icons.home),
+                  label: 'home',
+                ),
+                BottomNavigationBarItem(
+                  icon: Icon(Icons.attach_money_sharp),
+                  label: 'payments',
+                ),
+                BottomNavigationBarItem(
+                  icon: Icon(Icons.account_circle),
+                  label: 'profile',
+                ),
               ],
             ),
             backgroundColor: Theme.of(context).backgroundColor,
             body: pages[selectedItemPosition],
           );
-        }
-        else {
+        } else {
           return NoInternetScreen();
         }
-      }
+      },
     );
   }
 }

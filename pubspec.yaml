@@ -23,7 +23,7 @@ dependencies:
   flutter_snake_navigationbar: ^0.6.0
   pie_chart: ^5.1.0
   easy_localization: ^3.0.0
-  qr_code_scanner: ^0.6.1
+  qr_code_scanner: ^0.7.0
   connectivity_plus: ^2.2.0
   upgrader: ^3.12.1
   table_calendar: ^3.0.3
